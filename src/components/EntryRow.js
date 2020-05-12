@@ -35,6 +35,7 @@ const CommentEntry = () => {
 const EntryRow = ({ material, averages, stdevs }) => {
   const n = material.elements.length
   const [inputs, setInputs] = useState(Array(n).join(".").split("."))
+  const [message, setMessage] = useState('')
 
   const checkInputs = (averages, stdevs) => {
     const inputs = document.getElementsByClassName('observationInput')
@@ -94,20 +95,30 @@ const EntryRow = ({ material, averages, stdevs }) => {
     event.preventDefault()
     const user = localStorage.getItem('loggedAppUser')
     const comments = document.getElementById('observationComment').value
-    console.log(user)
     const inputElements = document.getElementsByClassName('observationInput')
     const inputsValues = [...inputElements].map(e => e.value)
     const newObservation = {
       user,
       method: 'CHEM-162',
+      material: material.name,
       obervations: inputsValues,
       comments
     }
-    console.log('sending this to DB:', newObservation)
+    console.log(newObservation)
+    let resultsString = ''
+    for (let i = 0; i < inputsValues.length; i++) {
+      resultsString += inputsValues[i] + ' '
+    }
+    setMessage('Reported values: ' + resultsString +
+      ' Comment: ' + comments)
+    setTimeout(() => {
+      setMessage('')
+    }, 10000)
   }
 
   return (
     <div>
+      <span style={{ color: 'red' }}>{message}</span>
       <form onSubmit={addObservation}>
         <div style={{ display: 'flex' }}>
 

@@ -14,7 +14,7 @@ const App = () => {
 
   const material = {
     method: 'CHEM-162',
-    name: 'QM-S Q1807 Human Serum',
+    name: 'QM-S Q1807 Serum',
     elements: ['Mn', 'Fe', 'Co', 'Cu', 'Zn', 'Se', 'Mo'],
     element_units: ['ppb', 'ppm', 'ppb', 'ppm', 'ppm', 'ppm', 'ppb'],
     elements_to_display: [1, 1, 1, 1, 1, 1, 1],
@@ -66,7 +66,8 @@ const App = () => {
 
         <Route path="/">
           <h1>jcqc control charting</h1>
-          <p>Need to make nav, display main options</p>
+          <p>Taking control charting into my own hands!</p>
+          <p>This will eventually be a pretty menu.</p>
         </Route>
       </Switch>
       <Todo />
