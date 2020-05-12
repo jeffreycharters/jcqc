@@ -1,5 +1,5 @@
 {
-  "material": [
+  "materials": [
     {
       "id": 1,
       "method": "CHEM-162",
@@ -29,6 +29,45 @@
         "ppm",
         "ppm",
         "ppm",
+        "ppb"
+      ],
+      "active": true
+    },
+    {
+      "id": 2,
+      "method": "CHEM-055",
+      "name": "Bovine Liver (in-house)",
+      "elements": [
+        "Mn",
+        "Fe",
+        "Co",
+        "Cu",
+        "Zn",
+        "Se",
+        "Mo",
+        "Pb",
+        "V"
+      ],
+      "elements_display": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "elements_units": [
+        "ppb",
+        "ppm",
+        "ppb",
+        "ppm",
+        "ppm",
+        "ppm",
+        "ppb",
+        "ppb",
         "ppb"
       ],
       "active": true

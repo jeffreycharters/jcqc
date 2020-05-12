@@ -4,6 +4,7 @@ import {
   Switch, Route, Link
 } from 'react-router-dom'
 
+import MainMenu from './components/MainMenu'
 import EntryRow from './components/EntryRow'
 import Todo from './components/Todo'
 
@@ -67,7 +68,7 @@ const App = () => {
         <Route path="/">
           <h1>jcqc control charting</h1>
           <p>Taking control charting into my own hands!</p>
-          <p>This will eventually be a pretty menu.</p>
+          <MainMenu />
         </Route>
       </Switch>
       <Todo />
