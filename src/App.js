@@ -56,7 +56,7 @@ const EntryRow = ({ elements, averages, stdevs }) => {
       setInputs(observations)
     }
     setTimeout(() => {
-      checkInputs(observations, averages, stdevs)
+      checkInputs(averages, stdevs)
     }, 10)
   }
 
