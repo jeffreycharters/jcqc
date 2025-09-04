@@ -1,7 +1,21 @@
 package data
 
-// ElementID represents the type used as keys in Record<ElementID, number>
-type ElementID string
+type Savable interface {
+	[]Method | []Element | []Instrument
+}
+
+// ElementID represents the type used as keys in map[ElementID]float64
+type ElementID struct {
+	Symbol           string
+	MassOrWavelength float64
+}
+
+type AnalysisMode string
+
+const (
+	MS  AnalysisMode = "mass_spectrometry"
+	OES AnalysisMode = "optical_emission_spectrometry"
+)
 
 // Method represents a laboratory method
 type Method struct {
@@ -13,6 +27,7 @@ type Method struct {
 	CalibrationCount       int                 `json:"calibration_count"`
 	CheckStandardTolerance int                 `json:"check_standard_tolerance"`
 	ReportSigFigs          int                 `json:"report_sig_figs"`
+	AnalysisMode           AnalysisMode        `json:"analysis_mode"`
 	Elements               []Element           `json:"elements,omitempty"`
 	CheckStandards         []CheckStandard     `json:"check_standards,omitempty"`
 	Blanks                 []Blank             `json:"blanks,omitempty"`
@@ -21,17 +36,24 @@ type Method struct {
 
 // Element represents a chemical element
 type Element struct {
-	ID     string  `json:"id"`
-	Symbol string  `json:"symbol"`
-	Mass   float64 `json:"mass"`
-	Active bool    `json:"active"`
+	ID               string  `json:"id"`
+	Symbol           string  `json:"symbol"`
+	MassOrWavelength float64 `json:"mass_or_wavelength"`
+	Active           bool    `json:"active"`
 }
+
+type Unit string
+
+const (
+	PPB Unit = "ppb"
+	PPM Unit = "ppm"
+)
 
 // MethodElement represents the relationship between a method and element
 type MethodElement struct {
 	Element string `json:"element"`
 	Method  string `json:"method"`
-	Units   string `json:"units"` // "ppb" or "ppm"
+	Units   Unit   `json:"units"`
 }
 
 // CheckStandard represents a check standard with values for different elements
@@ -61,9 +83,10 @@ type ReferenceMaterial struct {
 
 // Instrument represents a laboratory instrument
 type Instrument struct {
-	ID              string `json:"id"`
-	Name            string `json:"name"`
-	AutosamplerInfo string `json:"autosampler_info"`
-	Serial          string `json:"serial"`
-	SoftwareVersion string `json:"software_version"`
+	ID              string       `json:"id"`
+	Name            string       `json:"name"`
+	Mode            AnalysisMode `json:"mode"`
+	AutosamplerInfo string       `json:"autosampler_info"`
+	Serial          string       `json:"serial"`
+	SoftwareVersion string       `json:"software_version"`
 }
