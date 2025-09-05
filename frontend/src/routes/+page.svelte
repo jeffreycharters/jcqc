@@ -1,7 +1,3 @@
-<div class="absolute bottom-4 left-4">
-	<a class="btn no-underline" href="/edit">Edit stuff</a>
-</div>
-
 <div class="align-center p-4">
 	<h1 class="mx-auto w-fit text-2xl">JCQC Reporting Application</h1>
 
@@ -24,6 +20,6 @@
 
 <!-- <MethodParams /> -->
 
-<div class="absolute bottom-4 left-4">
+<div class="absolute right-4 top-4">
 	<a class="btn no-underline" href="/edit">Edit stuff</a>
 </div>

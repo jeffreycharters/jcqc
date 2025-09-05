@@ -3,11 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"jcqc/internal/config"
 )
 
 // App struct
 type App struct {
-	ctx context.Context
+	ctx    context.Context
+	config *config.Config
 }
 
 // NewApp creates a new App application struct

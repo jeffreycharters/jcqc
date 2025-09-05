@@ -1,7 +1,9 @@
-package data
+package db
 
-type Savable interface {
-	[]Method | []Element | []Instrument
+type Database struct {
+	Methods     []Method
+	Elements    []Element
+	Instruments []Instrument
 }
 
 // ElementID represents the type used as keys in map[ElementID]float64
