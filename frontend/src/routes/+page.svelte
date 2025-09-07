@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { page } from "$app/state"
+	import { getDatabaseState } from "$lib/db.svelte"
 	import { PagePrint } from "$lib/wailsjs/go/main/App"
 
 	async function printPage() {
 		await PagePrint()
 	}
 
-	const database = page.data.database
+	const database = getDatabaseState()
 	console.log(database)
 </script>
 

@@ -6,16 +6,14 @@
 	import { SquareX } from "@lucide/svelte"
 	import { page } from "$app/state"
 	import type { db } from "$lib/wailsjs/go/models"
-	import type { ComponentProps } from "svelte"
 
 	const database: db.Database = page.data.database
 
 	interface Props {
 		toggleAddMethodForm: () => void
-		showAddMethodForm: boolean
 	}
 
-	let { toggleAddMethodForm, showAddMethodForm = $bindable() }: Props = $props()
+	let { toggleAddMethodForm }: Props = $props()
 
 	const schema = z.object({
 		name: z.string({ error: "Name is required" }).min(5, "Name must be at least 5 characters"),
@@ -84,65 +82,63 @@
 	}
 </script>
 
-{#if showAddMethodForm}
-	<div
-		class="my-4 mb-8 w-fit rounded border border-gray-900 bg-white p-4 shadow"
-		transition:slide={{ duration: 200 }}
-	>
-		<div class="flex items-center justify-between">
-			<h2>Add new</h2>
-			<button onclick={toggleAddMethodForm}>
-				<SquareX class="h-6 w-6 stroke-stone-500" />
-			</button>
-		</div>
-		<form onsubmit={addMethod}>
-			<TextInput name="name" label="Method Name" placeholder="e.g. TOXI-064" bind:value={name} />
-			<TextInput
-				name="name"
-				label="Method Description"
-				placeholder="e.g. Metals in sewage"
-				bind:value={description}
-			/>
-			<div class="flex max-w-md items-end justify-between gap-8">
-				<NumberInput
-					name="check-standard-limit"
-					label="Check Standard Tolerance (%)"
-					bind:value={checkStandardTolerance}
-					placeholder="e.g. 15"
-				/>
-				<NumberInput
-					name="rpd-limit"
-					label="Duplicate RPD limit (%)"
-					bind:value={rpdLimit}
-					placeholder="e.g. 20"
-				/>
-			</div>
-
-			<div class="flex max-w-md items-end justify-between gap-8">
-				<NumberInput
-					name="cal-count"
-					label="Non-blank calibration standards"
-					placeholder="e.g. 6"
-					bind:value={calibrationCount}
-				/>
-				<NumberInput
-					name="sigfigs"
-					label="Report sig figs"
-					placeholder="e.g. 2"
-					bind:value={reportSigFigs}
-				/>
-			</div>
-
-			<div class="mb-1 w-full">
-				<button type="submit" class="btn w-full">Add Method</button>
-			</div>
-			<div class="w-fit">
-				{#if formError}
-					<div transition:slide={{ duration: 200 }} class="ml-2 text-sm italic text-red-600">
-						{formError}
-					</div>
-				{/if}
-			</div>
-		</form>
+<div
+	class="my-4 mb-8 w-fit rounded border border-gray-900 bg-white p-4 shadow"
+	transition:slide={{ duration: 200 }}
+>
+	<div class="flex items-center justify-between">
+		<h2>Add new</h2>
+		<button onclick={toggleAddMethodForm}>
+			<SquareX class="h-6 w-6 stroke-stone-500" />
+		</button>
 	</div>
-{/if}
+	<form onsubmit={addMethod}>
+		<TextInput name="name" label="Method Name" placeholder="e.g. TOXI-064" bind:value={name} />
+		<TextInput
+			name="name"
+			label="Method Description"
+			placeholder="e.g. Metals in sewage"
+			bind:value={description}
+		/>
+		<div class="flex max-w-md items-end justify-between gap-8">
+			<NumberInput
+				name="check-standard-limit"
+				label="Check Standard Tolerance (%)"
+				bind:value={checkStandardTolerance}
+				placeholder="e.g. 15"
+			/>
+			<NumberInput
+				name="rpd-limit"
+				label="Duplicate RPD limit (%)"
+				bind:value={rpdLimit}
+				placeholder="e.g. 20"
+			/>
+		</div>
+
+		<div class="flex max-w-md items-end justify-between gap-8">
+			<NumberInput
+				name="cal-count"
+				label="Non-blank calibration standards"
+				placeholder="e.g. 6"
+				bind:value={calibrationCount}
+			/>
+			<NumberInput
+				name="sigfigs"
+				label="Report sig figs"
+				placeholder="e.g. 2"
+				bind:value={reportSigFigs}
+			/>
+		</div>
+
+		<div class="mb-1 w-full">
+			<button type="submit" class="btn w-full">Add Method</button>
+		</div>
+		<div class="w-fit">
+			{#if formError}
+				<div transition:slide={{ duration: 200 }} class="ml-2 text-sm italic text-red-600">
+					{formError}
+				</div>
+			{/if}
+		</div>
+	</form>
+</div>

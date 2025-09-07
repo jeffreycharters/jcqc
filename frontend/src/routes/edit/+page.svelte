@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { PageProps } from "./$types"
 	import Menu from "./Menu.svelte"
 
 	import AddMethodForm from "./AddMethodForm.svelte"
@@ -9,8 +8,8 @@
 	import { crossfade } from "svelte/transition"
 
 	import { ListPlus } from "@lucide/svelte"
-	import { page } from "$app/state"
 	import type { db } from "$lib/wailsjs/go/models"
+	import { page } from "$app/state"
 
 	const database: db.Database = page.data.database
 	console.log(database)
@@ -63,6 +62,8 @@
 			</button>
 		</div>
 
-		<AddMethodForm {showAddMethodForm} {toggleAddMethodForm} />
+		{#if showAddMethodForm}
+			<AddMethodForm {toggleAddMethodForm} />
+		{/if}
 	</div>
 </div>

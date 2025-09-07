@@ -45,6 +45,17 @@ func (c *Config) setPWD(ctx context.Context) {
 		})
 	}
 
+	output, err := json.Marshal(c)
+	if err != nil {
+		slog.Error("Failed to marshal config", "error", err)
+		panic(err)
+	}
+
+	if err := os.WriteFile("jcqc-config.json", output, 0644); err != nil {
+		slog.Error("Failed to write config", "error", err)
+		panic(err)
+	}
+
 	c.DatabasePath = pwd
 }
 
@@ -58,11 +69,7 @@ func (c *Config) LoadDatabase(ctx context.Context) *db.Database {
 	contents, err := os.ReadFile(path.Join(c.DatabasePath, "database.json"))
 	if err != nil && os.IsNotExist(err) {
 		os.WriteFile(path.Join(c.DatabasePath, "database.json"), []byte("{}"), 0644)
-		return &db.Database{
-			Methods:     []db.Method{},
-			Elements:    []db.Element{},
-			Instruments: []db.Instrument{},
-		}
+		return &db.Database{}
 	}
 	if err != nil {
 		slog.Error("Failed to load database", "error", err)
