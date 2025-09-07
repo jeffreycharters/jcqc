@@ -4,10 +4,9 @@
 	import { slide } from "svelte/transition"
 	import { z } from "zod"
 	import { SquareX } from "@lucide/svelte"
-	import { page } from "$app/state"
-	import type { db } from "$lib/wailsjs/go/models"
+	import { getDatabaseState } from "$lib/db.svelte"
 
-	const database: db.Database = page.data.database
+	const database = getDatabaseState()
 
 	interface Props {
 		toggleAddMethodForm: () => void
@@ -54,7 +53,7 @@
 	let checkStandardTolerance: number = $state(15)
 	let reportSigFigs: number = $state(2)
 
-	const methods = $state(database.Methods ?? [])
+	const methods = $state(database.data?.methods ?? [])
 
 	const addMethod = async (e: Event) => {
 		e.preventDefault()

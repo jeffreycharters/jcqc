@@ -8,11 +8,9 @@
 	import { crossfade } from "svelte/transition"
 
 	import { ListPlus } from "@lucide/svelte"
-	import type { db } from "$lib/wailsjs/go/models"
-	import { page } from "$app/state"
+	import { getDatabaseState } from "$lib/db.svelte"
 
-	const database: db.Database = page.data.database
-	console.log(database)
+	const database = getDatabaseState().data
 
 	const [send, receive] = crossfade({
 		duration: 250,
@@ -34,7 +32,7 @@
 		</div>
 
 		<div class="grid max-w-screen-lg grid-cols-3 gap-4">
-			{#each (database.Methods ?? []).filter((method) => method.active) as method (method.slug)}
+			{#each (database?.methods ?? []).filter((method) => method.active) as method (method.slug)}
 				<div
 					animate:flip={{ duration: 250 }}
 					in:send={{ key: method.slug }}
@@ -43,7 +41,7 @@
 					<MethodCard {method} />
 				</div>
 			{/each}
-			{#each (database.Methods ?? []).filter((method) => !method.active) as method (method.slug)}
+			{#each (database?.methods ?? []).filter((method) => !method.active) as method (method.slug)}
 				<div
 					animate:flip={{ duration: 250 }}
 					in:send={{ key: method.slug }}

@@ -1,9 +1,9 @@
 package db
 
 type Database struct {
-	Methods     []Method
-	Elements    []Element
-	Instruments []Instrument
+	Methods     []Method     `json:"methods"`
+	Elements    []Element    `json:"elements"`
+	Instruments []Instrument `json:"instruments"`
 }
 
 // ElementID represents the type used as keys in map[ElementID]float64

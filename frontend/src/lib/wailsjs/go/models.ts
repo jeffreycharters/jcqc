@@ -165,9 +165,9 @@ export namespace db {
 		}
 	}
 	export class Database {
-	    Methods: Method[];
-	    Elements: Element[];
-	    Instruments: Instrument[];
+	    methods: Method[];
+	    elements: Element[];
+	    instruments: Instrument[];
 	
 	    static createFrom(source: any = {}) {
 	        return new Database(source);
@@ -175,9 +175,9 @@ export namespace db {
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
-	        this.Methods = this.convertValues(source["Methods"], Method);
-	        this.Elements = this.convertValues(source["Elements"], Element);
-	        this.Instruments = this.convertValues(source["Instruments"], Instrument);
+	        this.methods = this.convertValues(source["methods"], Method);
+	        this.elements = this.convertValues(source["elements"], Element);
+	        this.instruments = this.convertValues(source["instruments"], Instrument);
 	    }
 	
 		convertValues(a: any, classs: any, asMap: boolean = false): any {

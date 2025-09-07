@@ -7,7 +7,6 @@
 	}
 
 	const database = getDatabaseState()
-	console.log(database)
 </script>
 
 <div class="align-center p-4">

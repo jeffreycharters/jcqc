@@ -3,16 +3,13 @@ import { LoadDatabase } from "./wailsjs/go/main/App"
 import { db } from "./wailsjs/go/models"
 
 class Database {
-	elements = $state<db.Element[]>([])
-	methods = $state<db.Method[]>([])
-	instruments = $state<db.Instrument[]>([])
+	data = $state<db.Database>()
 
 	constructor() {
 		LoadDatabase().then((db) => {
-			this.elements = db.Elements
-			this.methods = db.Methods
-			this.instruments = db.Instruments
+			this.data = db
 		})
+
 	}
 }
 
