@@ -1,3 +1,15 @@
+<script lang="ts">
+	import { page } from "$app/state"
+	import { PagePrint } from "$lib/wailsjs/go/main/App"
+
+	async function printPage() {
+		await PagePrint()
+	}
+
+	const database = page.data.database
+	console.log(database)
+</script>
+
 <div class="align-center p-4">
 	<h1 class="mx-auto w-fit text-2xl">JCQC Reporting Application</h1>
 
@@ -20,6 +32,7 @@
 
 <!-- <MethodParams /> -->
 
-<div class="absolute right-4 top-4">
+<div class="absolute right-4 top-4 flex items-baseline gap-2">
+	<button class="btn no-underline" onclick={printPage}>Print page</button>
 	<a class="btn no-underline" href="/edit">Edit stuff</a>
 </div>

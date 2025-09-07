@@ -1,0 +1,11 @@
+<script lang="ts">
+	export let value: number | undefined = undefined
+	export let label: string = ""
+	export let name: string
+	export let placeholder = ""
+</script>
+
+<div class="my-2 flex flex-col text-sm">
+	<label for={name}>{@html label}</label>
+	<input type="text" {name} class="number-input" bind:value {placeholder} />
+</div>
